@@ -8,17 +8,13 @@ namespace SpaceTraderWPF
 {
     public class Player
     {
-        private string _name;
+        public string Name { get; set; }
+        public List<Inventory> PlayerInventory { get; }
 
         public Player(string playerName)
         {
-            _name = playerName;
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
+            Name = playerName;
+            PlayerInventory = new List<Inventory>();
         }
     }
 }
