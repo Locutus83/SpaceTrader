@@ -9,12 +9,32 @@ namespace SpaceTraderWPF
     public class Player
     {
         public string Name { get; set; }
-        public List<Inventory> PlayerInventory { get; }
+        public Ship Ship { get; set; }
+        public PlayerInventory PlayerInventory { get; }
+        public double CashBalance { get; set; }
 
         public Player(string playerName)
         {
             Name = playerName;
-            PlayerInventory = new List<Inventory>();
+            Ship = new Ship("Starter Enterprise", 10000);
+            PlayerInventory = new PlayerInventory();
+            CashBalance = 5000d;
         }
+
+        #region Actions
+
+        public bool Buy(string itemName, int qnty, double price)
+        {
+            if (qnty * price > CashBalance)
+            {
+                return false;
+            }
+
+            CashBalance -= qnty * price;
+
+            return PlayerInventory.Buy(itemName, qnty, price);
+        }
+
+        #endregion
     }
 }
