@@ -57,6 +57,26 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
+        public void TestOverFuelStorageBuy()
+        {
+            Assert.IsFalse(_testPlayer.Buy(PlayerInventory.FUEL_NAME, 1000, 1d));
+            Assert.AreEqual(1, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetStorageUsed());
+            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(5000d, _testPlayer.CashBalance);
+        }
+
+        [TestMethod]
+        public void TestOverStorageBuy()
+        {
+            Assert.IsFalse(_testPlayer.Buy(PlayerInventory.DILITHIUM_NAME, 1000000, 0d));
+            Assert.AreEqual(0, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetStorageUsed());
+            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(5000d, _testPlayer.CashBalance);
+        }
+
+        [TestMethod]
         public void TestPlayerOverExtendBalance()
         {
             Assert.IsFalse(_testPlayer.Buy(PlayerInventory.FUEL_NAME, 100, 60d));

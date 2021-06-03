@@ -16,7 +16,7 @@ namespace SpaceTraderWPF
         public Player(string playerName)
         {
             Name = playerName;
-            Ship = new Ship("Starter Enterprise", 10000);
+            Ship = new Ship("Starter Enterprise");
             PlayerInventory = new PlayerInventory();
             CashBalance = 5000d;
         }
@@ -26,6 +26,14 @@ namespace SpaceTraderWPF
         public bool Buy(string itemName, int qnty, double price)
         {
             if (qnty * price > CashBalance)
+            {
+                return false;
+            }
+            if (itemName.Equals(PlayerInventory.FUEL_NAME, StringComparison.OrdinalIgnoreCase) && qnty > Ship.FuelCapacity - PlayerInventory.GetFuelStorageUsed())
+            {
+                return false;
+            }
+            if (!itemName.Equals(PlayerInventory.FUEL_NAME, StringComparison.OrdinalIgnoreCase) && qnty > Ship.Capacity - PlayerInventory.GetStorageUsed())
             {
                 return false;
             }

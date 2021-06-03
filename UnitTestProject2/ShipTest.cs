@@ -12,7 +12,7 @@ namespace UnitTestProject2
         [TestInitialize]
         public void SetupForTests()
         {
-            _testShip = new Ship("My first Ship", 10000); 
+            _testShip = new Ship("My first Ship"); 
         }
 
         [TestMethod]
@@ -25,11 +25,17 @@ namespace UnitTestProject2
         public void TestShipCapacity()
         {
             // Make sure it matches the starting capacity.
-            Assert.AreEqual(10000, _testShip.Capacity);
+            Assert.AreEqual(Ship.DEFAULT_CAPACITY, _testShip.Capacity);
 
             // Make sure we can change the capacity.
             _testShip.Capacity = 1000000;
             Assert.AreEqual(1000000, _testShip.Capacity);
+        }
+
+        [TestMethod]
+        public void TestShipFuelCapacity()
+        {
+            Assert.AreEqual(Ship.DEFAULT_FUEL_CAPACITY, _testShip.FuelCapacity);
         }
     }
 }
