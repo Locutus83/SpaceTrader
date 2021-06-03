@@ -29,6 +29,19 @@ namespace SpaceTraderWPF
             return foundInventory.Buy(purchasedInventory);
         }
 
+        public bool Sell(string name, int qnty, double price)
+        {
+            Inventory soldInventory = new Inventory(name, qnty, price);
+            Inventory foundInventory = FindInventoryObjByName(name);
+
+            if (foundInventory.Qnty < qnty)
+            {
+                return false;
+            }
+
+            return foundInventory.Sell(soldInventory);
+        }
+
         #endregion
 
         #region Special Getters
