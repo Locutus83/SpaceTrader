@@ -14,9 +14,9 @@ namespace SpaceTraderWPF
         public Queue<double> PurchaseHistory { get; private set; }
         public double AvgPricePaid => PurchaseHistory.Count > 0 ? PurchaseHistory.Sum() / PurchaseHistory.Count : 0;
 
-        public Inventory(string name)
+        public Inventory(string name, int initialQnty = 0)
         {
-            Init(name, 0, 0d);
+            Init(name, initialQnty, 0d);
         }
 
         /**

@@ -27,7 +27,7 @@ namespace UnitTestProject2
         [TestMethod]
         public void TestPlayerInitInventory()
         {
-            Assert.AreEqual(0, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
         }
 
         [TestMethod]
@@ -40,15 +40,15 @@ namespace UnitTestProject2
             const double DilithiumPrice = 4d;
 
             Assert.IsTrue(_testPlayer.Buy(PlayerInventory.FUEL_NAME, FuelQnty, FuelPrice));
-            Assert.AreEqual(1, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
             Assert.AreEqual(0, _testPlayer.PlayerInventory.GetStorageUsed());
-            Assert.AreEqual(FuelQnty, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(FuelQnty + 100, _testPlayer.PlayerInventory.GetFuelStorageUsed());
             Assert.AreEqual(PlayerStartCash - (FuelPrice * FuelQnty), _testPlayer.CashBalance);
 
             Assert.IsTrue(_testPlayer.Buy(PlayerInventory.DILITHIUM_NAME, DilithumQnty, DilithiumPrice));
-            Assert.AreEqual(2, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
             Assert.AreEqual(DilithumQnty, _testPlayer.PlayerInventory.GetStorageUsed());
-            Assert.AreEqual(FuelQnty, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(FuelQnty + 100, _testPlayer.PlayerInventory.GetFuelStorageUsed());
             Assert.AreEqual(
                 PlayerStartCash
                     - (FuelPrice * FuelQnty)
@@ -60,9 +60,9 @@ namespace UnitTestProject2
         public void TestOverFuelStorageBuy()
         {
             Assert.IsFalse(_testPlayer.Buy(PlayerInventory.FUEL_NAME, 1000, 1d));
-            Assert.AreEqual(1, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
             Assert.AreEqual(0, _testPlayer.PlayerInventory.GetStorageUsed());
-            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(100, _testPlayer.PlayerInventory.GetFuelStorageUsed());
             Assert.AreEqual(5000d, _testPlayer.CashBalance);
         }
 
@@ -70,9 +70,9 @@ namespace UnitTestProject2
         public void TestOverStorageBuy()
         {
             Assert.IsFalse(_testPlayer.Buy(PlayerInventory.DILITHIUM_NAME, 1000000, 0d));
-            Assert.AreEqual(0, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
             Assert.AreEqual(0, _testPlayer.PlayerInventory.GetStorageUsed());
-            Assert.AreEqual(0, _testPlayer.PlayerInventory.GetFuelStorageUsed());
+            Assert.AreEqual(100, _testPlayer.PlayerInventory.GetFuelStorageUsed());
             Assert.AreEqual(5000d, _testPlayer.CashBalance);
         }
 
@@ -80,7 +80,7 @@ namespace UnitTestProject2
         public void TestPlayerOverExtendBalance()
         {
             Assert.IsFalse(_testPlayer.Buy(PlayerInventory.FUEL_NAME, 100, 60d));
-            Assert.AreEqual(0, _testPlayer.PlayerInventory.Count);
+            Assert.AreEqual(11, _testPlayer.PlayerInventory.Count);
             Assert.AreEqual(5000d, _testPlayer.CashBalance);
         }
 

@@ -11,7 +11,7 @@ namespace SpaceTraderWPF
         #region Defaults
 
         public const int DEFAULT_CAPACITY = 10000;
-        public const int DEFAULT_FUEL_CAPACITY = 100;
+        public const int DEFAULT_FUEL_CAPACITY = 1000;
 
         #endregion
 
